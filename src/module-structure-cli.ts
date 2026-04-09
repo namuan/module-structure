@@ -79,7 +79,7 @@ export class Application {
             this.options = commandLineArgs(this.optionDefinitions);
         }
         catch (e) {
-            Application.exitWithFailure(e.message);
+            Application.exitWithFailure((e as Error).message);
         }
     }
 

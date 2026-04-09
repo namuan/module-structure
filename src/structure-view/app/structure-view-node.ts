@@ -16,21 +16,21 @@ export class StructureViewNode extends StructureViewObject implements StructureV
     private static readonly TEXT_PADDING = 10;
 
     canvas: JQuery;
-    rect: JQuery<SVGElement>;
-    icon: JQuery<SVGElement>;
-    text: JQuery<SVGElement>;
+    rect!: JQuery<SVGElement>;
+    icon!: JQuery<SVGElement>;
+    text!: JQuery<SVGElement>;
     model: StructureViewModelNode;
-    parent: StructureViewNode;
+    parent: StructureViewNode | null;
     rows: Array<StructureViewRow> = [];
     x: number = 0;
     y: number = 0;
     width: number = 0;
     height: number = 0;
     expanded: boolean = false;
-    visible: boolean;
-    private _selected: boolean;
+    visible: boolean = false;
+    private _selected: boolean = false;
 
-    constructor(parent: StructureViewNode, model: StructureViewModelNode, canvas: JQuery) {
+    constructor(parent: StructureViewNode | null, model: StructureViewModelNode, canvas: JQuery) {
         super();
 
         this.parent = parent;
@@ -84,7 +84,7 @@ export class StructureViewNode extends StructureViewObject implements StructureV
             "width": StructureViewNode.ICON_SIZE,
             "height": StructureViewNode.ICON_SIZE
         });
-        this.icon.get(0).setAttributeNS("http://www.w3.org/1999/xlink", "href", iconFile);
+        this.icon.get(0)!.setAttributeNS("http://www.w3.org/1999/xlink", "href", iconFile);
         this.icon.click(event => this.onClick(event));
         this.icon.dblclick(event => this.onDoubleClick(event));
         this.canvas.append(this.icon);
@@ -175,7 +175,7 @@ export class StructureViewNode extends StructureViewObject implements StructureV
     }
 
     private calculateSize(): Point {
-        const textBox = $(this.text).get(0).getBoundingClientRect();
+        const textBox = $(this.text).get(0)!.getBoundingClientRect();
         const minimumWidth = 2 * StructureViewNode.ICON_PADDING + StructureViewNode.ICON_SIZE
             + textBox.width + StructureViewNode.TEXT_PADDING;
         if (!this.expanded || this.rows.length === 0) {
@@ -300,7 +300,7 @@ export class StructureViewNode extends StructureViewObject implements StructureV
 
     isParentOf(source: StructureViewNode) {
         let parent = source.parent;
-        while (parent !== null) {
+        while (parent != null) {
             if (parent === this) {
                 return true;
             }

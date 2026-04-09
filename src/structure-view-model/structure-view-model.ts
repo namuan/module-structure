@@ -3,7 +3,7 @@ import {StructureViewModelDependency} from "./structure-view-model-dependency";
 
 
 export class StructureViewModel {
-    root: StructureViewModelNode = null;
+    root!: StructureViewModelNode;
     dependencies: Array<StructureViewModelDependency> = [];
     feedbacks: Array<StructureViewModelDependency> = [];
 }

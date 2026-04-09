@@ -4,7 +4,7 @@ export abstract class StructureMapEntity {
     private _path: string;
     private _name: string;
     private _simpleName: string;
-    private _parent: StructureMapPackage;
+    private _parent!: StructureMapPackage;
     private _dependencies: Array<StructureMapEntity> = [];
 
 

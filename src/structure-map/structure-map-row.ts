@@ -69,7 +69,7 @@ export class StructureMapRow {
             return 0;
         }
 
-        dependencyList = dependencyList.filter(firstItem => {
+        dependencyList = dependencyList.filter((firstItem: string) => {
             let secondItem = dependencyList[0];
             return secondItem === firstItem || secondItem.indexOf(firstItem) !== 0;
         });

@@ -9,8 +9,8 @@ const path = require("path");
 
 
 @suite class ModuleStructureAPIConfigurationTest {
-    private rootDir: string;
-    private outFile: string;
+    private rootDir: string | undefined = "";
+    private outFile: string | undefined = "";
 
     @test "checkRootDir rejects undefined rootDir"() {
         this.rootDir = undefined;

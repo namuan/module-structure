@@ -55,6 +55,7 @@
     "@testdeck/mocha": "0.3.3",
     "@types/babylon": "^6.16.5",
     "@types/chai": "5.2.3",
+    "@types/fs-extra": "11.0.4",
     "@types/jquery": "4.0.0",
     "@types/mocha": "10.0.10",
     "@types/node": "25.5.2",

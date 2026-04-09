@@ -8,8 +8,8 @@ import {StructureViewUtil} from "./structure-view-util";
 
 
 export class StructureView implements StructureViewObjectListener {
-    private canvas: JQuery;
-    private rootNode: StructureViewNode;
+    private canvas!: JQuery;
+    private rootNode!: StructureViewNode;
     private selectionService = new SelectionService();
     private dependenciesMap: any = {};
     private visibleLeafsMap: any = {};
@@ -578,7 +578,7 @@ export class StructureView implements StructureViewObjectListener {
     }
 
     private getDependenciesOf(nodes: Array<StructureViewNode>) {
-        let dependencies = [];
+        let dependencies: string[] = [];
         nodes.forEach(node => {
             dependencies = dependencies.concat(this.getDependenciesOfNode(node));
         });
@@ -592,7 +592,7 @@ export class StructureView implements StructureViewObjectListener {
             .map(dependency => this.formatDependencyOutput(node, dependency)) : [];
     }
 
-    private normalizeDependencies(dependencies: Array<string>, filteredNode: StructureViewNode = null): Array<string> {
+    private normalizeDependencies(dependencies: Array<string>, filteredNode: StructureViewNode | null = null): Array<string> {
         return dependencies
             .filter(firstDependency => {
                 for (let i = 0; i < dependencies.length; ++i) {
@@ -619,7 +619,7 @@ export class StructureView implements StructureViewObjectListener {
     }
 
     private getDependenciesBetween(nodes: Array<StructureViewNode>) {
-        let dependencies = [];
+        let dependencies: string[] = [];
 
         nodes.forEach(firstNode => {
             let firstNodeDependencies = this.dependenciesMap[firstNode.model.id];
@@ -627,7 +627,7 @@ export class StructureView implements StructureViewObjectListener {
                 return;
             }
             nodes.forEach(secondNode => {
-                firstNodeDependencies.forEach(dependency => {
+                firstNodeDependencies.forEach((dependency: string) => {
                     if (dependency.indexOf(firstNode.model.id) !== 0
                             && dependency.indexOf(secondNode.model.id) === 0) {
                         dependencies.push(this.formatDependencyOutput(firstNode, dependency));
@@ -650,7 +650,7 @@ export class StructureView implements StructureViewObjectListener {
         this.selectionService.getSelection().forEach(node => this.filterDependenciesOf(node));
     }
 
-    private filterDependenciesOf(node) {
+    private filterDependenciesOf(node: StructureViewNode) {
         if (!node.expanded) {
             this.filteredDependencies.push(node.model.id);
             return;

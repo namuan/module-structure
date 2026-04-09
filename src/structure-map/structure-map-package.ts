@@ -128,8 +128,8 @@ export class StructureMapPackage extends StructureMapEntity {
     private relevelizeSecondRow(): void {
         let firstRow = this._rows[0];
         let secondRow = this._rows[1];
-        let entitiesToBeMovedToFirstRow = [];
-        let entitiesToBeMovedToNewRow = [];
+        let entitiesToBeMovedToFirstRow: StructureMapEntity[] = [];
+        let entitiesToBeMovedToNewRow: StructureMapEntity[] = [];
 
         secondRow.entities.forEach(entity => {
             let dependenciesToEntity = firstRow.getDependencyCountTo(entity);
@@ -206,7 +206,7 @@ export class StructureMapPackage extends StructureMapEntity {
     }
 
     private relevelizeRowsAbove(rowIndex: number) {
-        let entititesToLevelize = [];
+        let entititesToLevelize: StructureMapEntity[] = [];
 
         for (let i = rowIndex - 1; i >= 0; --i) {
             let row = this._rows[i];

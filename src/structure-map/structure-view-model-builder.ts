@@ -11,7 +11,7 @@ const checkArgument = preconditions.checkArgument;
 
 
 export class StructureViewModelBuilder {
-    private viewModel: StructureViewModel;
+    private viewModel!: StructureViewModel;
     private visitedModules: any;
 
     public build(structureMap: StructureMapPackage): StructureViewModel {

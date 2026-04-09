@@ -9,7 +9,7 @@ import path = require("path");
 import process = require("process");
 import os = require("os");
 
-const log4js = require("log4js");
+import log4js = require("log4js");
 const project = require("../package.json");
 const PluginManager = require("js-plugins");
 
@@ -19,7 +19,7 @@ let opener = require("opener");
 
 const TEMP_DIR = "module-structure-0c8c1f08";
 
-let logger;
+let logger: log4js.Logger;
 let startTime = 0;
 let config: ModuleStructureConfiguration;
 let structureMap: StructureMapPackage;
@@ -144,13 +144,13 @@ function loadExtensions(): void {
         }
 
         let extensions = extensionsMap[extensionPoint];
-        extensions.forEach(id => registerExtension(extensionPoint, id, extensions.names[id]));
+        extensions.forEach((id: string) => registerExtension(extensionPoint, id, extensions.names[id]));
     }
 }
 
 function registerExtension(extensionPoint: any, id: string, factory: Function) {
     let info = {extension: extensionPoint, name: id};
-    factory(null, {}, info, (err, instance) => {
+    factory(null, {}, info, (err: any, instance: any) => {
         if (err) {
             logger.error(err);
             return;
@@ -260,7 +260,7 @@ function showViewModel(): void {
     });
 }
 
-function onRequest(req, res) {
+function onRequest(req: any, res: any) {
     try {
         if (firstRequest) {
             firstRequest = false;

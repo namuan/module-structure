@@ -4,10 +4,10 @@ import path = require("path");
 
 
 export class StructureMapModuleBuilder {
-    private readonly dependencyProviders: Map<string, StructureMapLanguageProvider>;
+    private readonly dependencyProviders: Record<string, StructureMapLanguageProvider>;
 
 
-    constructor(dependencyProviders: Map<string, StructureMapLanguageProvider>) {
+    constructor(dependencyProviders: Record<string, StructureMapLanguageProvider>) {
         this.dependencyProviders = dependencyProviders;
     }
 

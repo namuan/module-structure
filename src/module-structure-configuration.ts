@@ -15,8 +15,8 @@ export class ModuleStructureConfiguration {
     port = 3000;
     open = false;
     inputFile = "";
-    logging: boolean;
-    debug: boolean;
+    logging: boolean = false;
+    debug: boolean = false;
 
     constructor(options: any) {
         checkArgument(ModuleStructureConfiguration.checkRootDir(options), "invalid rootDir");
@@ -44,7 +44,7 @@ export class ModuleStructureConfiguration {
             && fs.statSync(options.rootDir).isDirectory();
     }
 
-    public static checkOutFile(outFile: string): boolean {
+    public static checkOutFile(outFile: string | undefined): boolean {
         if (!outFile) {
             return true;
         }

@@ -6,7 +6,7 @@ import {Application} from "../../../src/module-structure-cli";
 const path = require("path");
 
 @suite class ModuleStructureCLITest {
-    private cli: Application;
+    private cli!: Application;
     private api: any;
     private expectedConfig: any = {
         rootDir: "",
@@ -106,7 +106,7 @@ const path = require("path");
         this.givenAPI();
         this.givenCLI();
         this.givenHelpArgument();
-        expect(() => this.whenInvokingCLI()).to.throw(null);
+        expect(() => this.whenInvokingCLI()).to.throw();
     }
 
     private givenHelpArgument() {
@@ -117,7 +117,7 @@ const path = require("path");
         this.givenAPI();
         this.givenCLI();
         this.givenVersionArgument();
-        expect(() => this.whenInvokingCLI()).to.throw(null);
+        expect(() => this.whenInvokingCLI()).to.throw();
     }
 
     private givenVersionArgument() {

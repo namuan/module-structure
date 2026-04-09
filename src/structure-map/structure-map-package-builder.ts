@@ -13,20 +13,19 @@ const logger = require("log4js").getLogger();
 export class StructureMapPackageBuilder {
     public static readonly LANGUAGE_EXTENSION_POINT = "module-structure:language";
 
-    private rootDir: string;
-    private rootDirParent: string;
+    private rootDir!: string;
+    private rootDirParent!: string;
     private excludes: Array<string> = [];
-    private moduleBuilder: StructureMapModuleBuilder;
-    private dependencyProviders: Map<string, StructureMapLanguageProvider>;
+    private moduleBuilder!: StructureMapModuleBuilder;
+    private dependencyProviders: Record<string, StructureMapLanguageProvider> = {};
     private supportedExtensions: Array<string> = [];
-    private processedModulesMap: Map<string, StructureMapModule>;
-    private processedModules: Array<StructureMapModule>;
+    private processedModulesMap!: Record<string, StructureMapModule>;
+    private processedModules!: Array<StructureMapModule>;
 
     constructor(extensionRegistry: ExtensionRegistry) {
         checkArgument(extensionRegistry);
 
-        this.dependencyProviders = <Map<string, StructureMapLanguageProvider>>
-            extensionRegistry.getExtensions(StructureMapPackageBuilder.LANGUAGE_EXTENSION_POINT);
+        this.dependencyProviders = extensionRegistry.getExtensions(StructureMapPackageBuilder.LANGUAGE_EXTENSION_POINT) as Record<string, StructureMapLanguageProvider>;
 
         let extensionsString = "";
         for (let extension in this.dependencyProviders) {
@@ -43,7 +42,7 @@ export class StructureMapPackageBuilder {
     public build(rootDir: string, excludes: string[]): StructureMapPackage {
         this.setOptions(rootDir, excludes);
 
-        return this.buildInternal(this.rootDir);
+        return this.buildInternal(this.rootDir)!;
     }
 
     private setOptions(rootDir: string, excludes: string[]) {
@@ -54,7 +53,7 @@ export class StructureMapPackageBuilder {
         this.excludes = excludes;
     }
 
-    private buildInternal(dir: string): StructureMapPackage {
+    private buildInternal(dir: string): StructureMapPackage | null {
         let packageName = this.getPackageName(dir);
         if (this.isExcluded(packageName)) {
             return null;
@@ -125,7 +124,7 @@ export class StructureMapPackageBuilder {
     }
 
     private getModuleFiles(dir: string): string[] {
-        let moduleFileMap = {};
+        let moduleFileMap: Record<string, string> = {};
         fs.readdirSync(dir)
             .filter(fileName => fs.statSync(path.join(dir, fileName)).isFile())
             .filter(fileName => this.supportedExtensions.indexOf(path.extname(fileName)) > -1)
@@ -151,7 +150,7 @@ export class StructureMapPackageBuilder {
     }
 
     private postProcessModules(modules: Array<StructureMapModule>): Array<StructureMapModule> {
-        this.processedModulesMap = new Map<string, StructureMapModule>();
+        this.processedModulesMap = {};
         this.processedModules = [];
 
         modules.forEach(module => {
@@ -171,7 +170,7 @@ export class StructureMapPackageBuilder {
         let moduleExtension = path.parse(module.simpleName).ext;
         let moduleSimpleName = path.parse(module.simpleName).name;
         let moduleName = module.name.substr(0, module.name.length - moduleExtension.length);
-        let moduleImports = [];
+        let moduleImports: string[] = [];
 
         module.imports.forEach(moduleImport => {
             let moduleExt = path.parse(moduleImport).ext;

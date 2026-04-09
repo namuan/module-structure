@@ -9,11 +9,11 @@ const checkArgument = preconditions.checkArgument;
 
 
 export class StructureMapBuilder {
-    private dir: string;
+    private dir!: string;
     private excludes: string[] = [];
     private packageIndex: any = {};
     private moduleIndex: any = {};
-    private structureMap: StructureMapPackage;
+    private structureMap!: StructureMapPackage;
     private extensionRegistry: ExtensionRegistry;
 
 
