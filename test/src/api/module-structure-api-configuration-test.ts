@@ -1,6 +1,6 @@
 import {ModuleStructureConfiguration} from "../../../src/module-structure-configuration";
 
-import {suite, test} from "mocha-typescript";
+import {suite, test} from "@testdeck/mocha";
 import {expect} from "chai";
 
 const fs = require("fs");

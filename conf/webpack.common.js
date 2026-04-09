@@ -1,5 +1,6 @@
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const helpers = require("./helpers");
 
 
@@ -10,24 +11,24 @@ module.exports = {
     },
 
     resolve: {
-        extensions: [".js", ".ts"]
+        extensions: [".js", ".ts"],
+        alias: {
+            jquery: require("path").resolve(__dirname, "../node_modules/jquery/dist/jquery.js")
+        }
     },
 
     module: {
         rules: [
-            {test: /\.ts$/, use: "awesome-typescript-loader"},
+            {test: /\.ts$/, use: "ts-loader"},
             {test: /\.html$/, use: "html-loader"},
-            {test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico)$/,use: "file-loader?name=assets/[name].[hash].[ext]"},
-            {test: /\.svg/, use: "file-loader?name=assets/[name].[ext]"},
+            {test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico)$/, use: {loader: "file-loader", options: {name: "assets/[name].[hash].[ext]"}}},
+            {test: /\.svg/, use: {loader: "file-loader", options: {name: "assets/[name].[ext]"}}},
             {test: /\.css$/,
                 exclude: helpers.root("src", "app"),
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader?sourceMap"
-                })
+                use: [MiniCssExtractPlugin.loader, "css-loader"]
             },
             {test: /\.scss$/, use: [
-                    {loader: "style-loader"},
+                    {loader: MiniCssExtractPlugin.loader},
                     {loader: "css-loader"},
                     {loader: "sass-loader"}
                 ]
@@ -35,9 +36,13 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("[name].css"),
+        new MiniCssExtractPlugin({filename: "[name].css"}),
         new HtmlWebpackPlugin({
             template: "src/structure-view/index.html"
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
         })
     ]
 };
