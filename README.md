@@ -1,8 +1,7 @@
 # Module Structure
 
 <a href="https://www.npmjs.com/package/module-structure"><img alt="npm Version" src="https://img.shields.io/npm/v/module-structure.svg"></a>
-<a href="https://travis-ci.org/rfruesmer/module-structure"><img alt="Build Status" src="https://travis-ci.org/rfruesmer/module-structure.svg?branch=master"></a>
-<a href="https://codecov.io/gh/rfruesmer/module-structure"><img alt="Coverage Status" src="https://codecov.io/gh/rfruesmer/module-structure/master.svg"></a>
+<a href="https://github.com/namuan/module-structure/actions/workflows/ci.yml"><img alt="Build Status" src="https://github.com/namuan/module-structure/actions/workflows/ci.yml/badge.svg"></a>
 
 
 Creates levelized structure maps (LSMs) from ECMAScript/JavaScript, TypeScript and AMD module dependencies - 
@@ -52,7 +51,7 @@ But for now, it's already possible to influence display of dependencies with the
 
 ## Prerequisites
 
-Requires a recent Node.js installation (>= 10.x).
+Requires Node.js >= 18.
 
 ## CLI 
 
