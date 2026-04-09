@@ -10,9 +10,11 @@ body {
 }
 
 #canvas {
-    position:absolute;
+    position: absolute;
     left: 50%;
     top: 50%;
+    min-width: 100vw;
+    min-height: 100vh;
     padding-right: 10px;
     padding-bottom: 10px;
     transform: translate(-50%, -50%);

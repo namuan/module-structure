@@ -21,10 +21,12 @@ export class StructureView implements StructureViewObjectListener {
     public show(model: StructureViewModel) {
         this.initCanvas();
         this.createRootNode(model);
-        this.resize();
         this.indexDependencies(model);
         this.subscribe();
-        this.makeVisible();
+        requestAnimationFrame(() => {
+            this.makeVisible();
+            this.resize();
+        });
     }
 
     private initCanvas(): void {
