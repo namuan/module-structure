@@ -18,7 +18,6 @@ module.exports = {
 
     module: {
         rules: [
-            {test: /\.ts$/, use: "ts-loader"},
             {test: /\.html$/, use: "html-loader"},
             {test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico|svg)$/, type: "asset/resource", generator: {filename: "assets/[name][hash][ext]"}},
             {test: /\.css$/,

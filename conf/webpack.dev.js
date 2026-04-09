@@ -15,6 +15,7 @@ module.exports = webpackMerge(commonConfig, {
 
     module: {
         rules: [
+            {test: /\.ts$/, use: "ts-loader"}
         ]
     },
 
