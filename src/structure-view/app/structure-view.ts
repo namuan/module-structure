@@ -145,7 +145,11 @@ export class StructureView implements StructureViewObjectListener {
 
     private subscribe(): void {
         this.rootNode.addListener(this);
-        window.addEventListener("resize", () => this.resize());
+        let resizeTimer: ReturnType<typeof setTimeout>;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => this.resize(), 100);
+        });
         document.addEventListener("keydown", event => this.onKeyDown(event));
     }
 
