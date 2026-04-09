@@ -73,42 +73,22 @@ export class StructureView implements StructureViewObjectListener {
     }
 
     private resize(): void {
-        this.rootNode.setPosition(1, 1);
+        const contentWidth = this.rootNode.width;
+        const contentHeight = this.rootNode.height;
+
+        const canvasWidth = Math.max(contentWidth + 20, window.innerWidth);
+        const canvasHeight = Math.max(contentHeight + 20, window.innerHeight);
+
+        const x = Math.round((canvasWidth - contentWidth) / 2);
+        const y = Math.round((canvasHeight - contentHeight) / 2);
+
+        this.rootNode.setPosition(x, y);
         this.rootNode.layout();
 
         this.canvas.attr({
-            style: this.calculateStyles(),
-            width: this.rootNode.width + 2,
-            height: this.rootNode.height + 2
+            width: canvasWidth,
+            height: canvasHeight
         });
-    }
-
-    /**
-     *  Workaround for correct centering while scrollbars are visible.
-     */
-    private calculateStyles(): string {
-        let left = "";
-        let top = "";
-        let transform = "";
-
-        let scrollX = this.rootNode.width > window.innerWidth;
-        let scrollY = this.rootNode.height > window.innerHeight;
-
-        if (scrollX && scrollY) {
-            left = "left: 10px;";
-            top = "top: 10px;";
-            transform = "transform: translate(0, 0);";
-        }
-        else if (scrollX) {
-            left = "left: 10px;";
-            transform = "transform: translate(0, -50%);";
-        }
-        else if (scrollY) {
-            top = "top: 10px;";
-            transform = "transform: translate(-50%, 0);";
-        }
-
-        return left + top + transform;
     }
 
     private indexDependencies(model: StructureViewModel): void {
