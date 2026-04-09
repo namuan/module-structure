@@ -1,6 +1,5 @@
 # Module Structure
 
-<a href="https://www.npmjs.com/package/module-structure"><img alt="npm Version" src="https://img.shields.io/npm/v/module-structure.svg"></a>
 <a href="https://github.com/namuan/module-structure/actions/workflows/ci.yml"><img alt="Build Status" src="https://github.com/namuan/module-structure/actions/workflows/ci.yml/badge.svg"></a>
 
 
@@ -53,11 +52,14 @@ But for now, it's already possible to influence display of dependencies with the
 
 Requires Node.js >= 18.
 
-## CLI 
+## CLI
 
-### Installation
+### Build
 
-`npm i -g module-structure module-structure-lang-ts module-structure-lang-js`
+```
+npm ci
+npm run build-prod-lib
+```
 
 ### Usage
 
@@ -87,11 +89,7 @@ Reads an existing structure map JSON file and displays it in default browser.
 | --inputFile |       | Skips the analysis step and directly renders the specified model file as a diagram in your default browser.                                      |
 | --port      | -p    | Port for serving the included viewer web-app (defaults to 3000). Omitted if --outFile is specified.                                              |
 
-## API 
-
-### Installation
-
-`npm i --save module-structure module-structure-lang-ts module-structure-lang-js`
+## API
 
 ### Usage
 
