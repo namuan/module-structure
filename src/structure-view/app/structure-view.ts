@@ -515,23 +515,25 @@ export class StructureView implements StructureViewObjectListener {
     }
 
     private onKeyDown(event: KeyboardEvent) {
-        if (event.key === "d" && event.altKey) {
+        if (event.code === "KeyD" && event.altKey) {
             this.showAllDependencies();
             this.stopPropagation(event);
         }
-        else if (event.key === "s" && event.altKey) {
+        else if (event.code === "KeyS" && event.altKey) {
             this.showDependenciesOnSelected();
             this.stopPropagation(event);
         }
-        else if (event.key === "b" && event.altKey) {
+        else if (event.code === "KeyB" && event.altKey) {
             this.showDependenciesBetweenSelected();
             this.stopPropagation(event);
         }
-        else if (event.key === "+" && event.altKey) {
+        else if ((event.key === "+" || event.code === "Equal") && event.altKey) {
             this.expandAll(this.rootNode);
+            this.stopPropagation(event);
         }
-        else if (event.key === "-" && event.altKey) {
+        else if ((event.key === "-" || event.code === "Minus") && event.altKey) {
             this.collapseAll(this.rootNode);
+            this.stopPropagation(event);
         }
     }
 
