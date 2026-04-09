@@ -12,10 +12,10 @@ export class StructureMapPackage extends StructureMapEntity {
     private _rows: Array<StructureMapRow> = [];
 
     constructor(path: string,
-                name: string,
-                simpleName: string,
-                childPackages: Array<StructureMapPackage>,
-                modules: Array<StructureMapModule>) {
+        name: string,
+        simpleName: string,
+        childPackages: Array<StructureMapPackage>,
+        modules: Array<StructureMapModule>) {
         super(path, name, simpleName);
 
         this._packages = childPackages.slice();

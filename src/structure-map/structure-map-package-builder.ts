@@ -161,7 +161,7 @@ export class StructureMapPackageBuilder {
             }
             else {
                 this.processedModules.push(module);
-           }
+            }
         });
 
         return this.processedModules;

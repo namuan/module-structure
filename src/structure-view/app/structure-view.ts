@@ -225,7 +225,7 @@ export class StructureView implements StructureViewObjectListener {
 
     private addVisibleLeafs(parent: StructureViewNode): void {
         this.getVisibleLeafs(parent)
-                .forEach(leaf => this.visibleLeafsMap[leaf.model.id] = leaf);
+            .forEach(leaf => this.visibleLeafsMap[leaf.model.id] = leaf);
     }
 
     private createDependencyArrowsOf(node: StructureViewNode): void {

@@ -7,21 +7,21 @@
     "module-structure": "bin/module-structure.js"
   },
   "scripts": {
-    "build-dev": "tsc -p . && npm run tslint",
+    "build-dev": "tsc -p . && npm run lint",
     "build-prod": "npm run clean-js && npm run test && npm run clean-dist && npm run build-prod-lib && npm run build-prod-webapp",
     "build-prod-lib": "npm run tsc-prod-lib && cp-cli package.json dist/package.json",
     "build-prod-webapp": "webpack --config conf/webpack.prod.js --progress --profile --bail",
     "clean-dist": "rimraf dist/",
     "clean-js": "rimraf src/**/*.js && rimraf src/**/*.js.map && rimraf test/resources/ts/**/*.js && rimraf test/resources/ts/**/*.js.map",
     "pretest": "npm run build-dev",
-    "posttest": "nyc report --reporter=json && codecov -f coverage/*.json",
+    "posttest": "nyc report --reporter=json",
     "publish-how-to": "npm version patch && git push && npm run build-prod && npm publish",
     "start-dev-server": "webpack-dev-server --config conf/webpack.dev.js  --hot --inline --progress --port 8080",
     "start-prod-server": "http-server dist/web-app -o http://localhost:8080?data=module-structure.json",
     "test": "nyc mocha test/src/**/*.js",
     "tsc-prod-lib": "tsc -p conf/tsconfig.prod.json --outDir dist/lib",
     "tsc-test-resources": "tsc -p test/resources/ts",
-    "tslint": "tslint -c conf/tslint.json --project ."
+    "lint": "eslint src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -48,6 +48,9 @@
     "url": "https://github.com/rfruesmer/module-structure/issues"
   },
   "homepage": "https://github.com/rfruesmer/module-structure#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
     "@testdeck/mocha": "0.3.3",
     "@types/babylon": "^6.16.5",
@@ -56,11 +59,12 @@
     "@types/mocha": "10.0.10",
     "@types/node": "25.5.2",
     "@types/sinon": "21.0.1",
+    "@typescript-eslint/eslint-plugin": "8.58.1",
+    "@typescript-eslint/parser": "8.58.1",
     "chai": "6.2.2",
-    "codecov": "^3.6.5",
     "cp-cli": "^2.0.0",
     "css-loader": "7.1.4",
-    "file-loader": "^6.0.0",
+    "eslint": "10.2.0",
     "html-loader": "5.1.0",
     "html-webpack-plugin": "5.6.6",
     "mini-css-extract-plugin": "2.10.2",
@@ -69,12 +73,9 @@
     "nyc": "18.0.0",
     "raw-loader": "^4.0.1",
     "rimraf": "6.1.3",
-    "script-loader": "^0.7.2",
     "sinon": "21.0.3",
-    "source-map-loader": "5.0.0",
     "style-loader": "4.0.0",
     "ts-loader": "9.5.7",
-    "tslint": "^6.1.1",
     "typescript": "6.0.2",
     "webpack": "5.106.0",
     "webpack-cli": "7.0.2",

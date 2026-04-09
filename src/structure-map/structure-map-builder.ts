@@ -59,7 +59,7 @@ export class StructureMapBuilder {
     private setupDependencies(_package: StructureMapPackage) {
         _package.packages.forEach(childPackage => this.setupDependencies(childPackage));
         _package.modules.forEach(module =>
-                module.imports.forEach(_import => this.setupModuleDependency(module, _import)));
+            module.imports.forEach(_import => this.setupModuleDependency(module, _import)));
     }
 
     private setupModuleDependency(module: StructureMapModule, _import: string): void {

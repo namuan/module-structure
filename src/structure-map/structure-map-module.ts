@@ -5,9 +5,9 @@ export class StructureMapModule extends StructureMapEntity {
     private _imports: Array<string> = [];
 
     constructor(path: string,
-                name: string,
-                simpleName: string,
-                imports: Array<string>) {
+        name: string,
+        simpleName: string,
+        imports: Array<string>) {
         super(path, name, simpleName);
 
         this._imports = imports.slice();

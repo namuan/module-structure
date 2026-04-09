@@ -6,12 +6,11 @@ const helpers = require("./helpers");
 
 module.exports = {
     entry: {
-        "vendor": "./src/structure-view/vendor.ts",
         "app": "./src/structure-view/main.ts"
     },
 
     resolve: {
-        extensions: [".js", ".ts"],
+        extensions: [".ts", ".js"],
         alias: {
             jquery: require("path").resolve(__dirname, "../node_modules/jquery/dist/jquery.js")
         }
@@ -21,8 +20,7 @@ module.exports = {
         rules: [
             {test: /\.ts$/, use: "ts-loader"},
             {test: /\.html$/, use: "html-loader"},
-            {test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico)$/, use: {loader: "file-loader", options: {name: "assets/[name].[hash].[ext]"}}},
-            {test: /\.svg/, use: {loader: "file-loader", options: {name: "assets/[name].[ext]"}}},
+            {test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico|svg)$/, type: "asset/resource", generator: {filename: "assets/[name][hash][ext]"}},
             {test: /\.css$/,
                 exclude: helpers.root("src", "app"),
                 use: [MiniCssExtractPlugin.loader, "css-loader"]
